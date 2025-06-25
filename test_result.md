@@ -122,15 +122,18 @@ backend:
 
   - task: "Emergency Information API"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Implemented emergency information system with first aid steps and emergency contact numbers"
+      - working: true
+        agent: "testing"
+        comment: "Tested the GET /api/emergency endpoint. It correctly returns 3 emergency information items with first aid steps and emergency contact numbers, sorted by priority."
 
   - task: "Sample Snake Database Initialization"
     implemented: true
