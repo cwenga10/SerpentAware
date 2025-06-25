@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐍 SerpentAware - Snake Safety & Education</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <!-- Loading Screen -->
+    <div id="loading" class="fixed inset-0 bg-green-600 flex items-center justify-center z-50">
+        <div class="text-center text-white">
+            <div class="text-6xl mb-4">🐍</div>
+            <div class="text-2xl font-bold mb-2">SerpentAware</div>
+            <div class="text-lg">Loading snake database...</div>
+        </div>
+    </div>
+
+    <!-- Main App Container -->
+    <div id="app" class="hidden">
+        <!-- Home View -->
+        <div id="home-view" class="view">
+            <!-- Header -->
+            <header class="bg-gradient-to-r from-green-600 to-blue-600 text-white py-8">
+                <div class="container mx-auto px-4 text-center">
+                    <h1 class="text-5xl font-bold mb-4">🐍 SerpentAware</h1>
+                    <p class="text-xl mb-6">Your Complete Guide to Snake Safety & Education</p>
+                    <div class="flex justify-center gap-8 text-sm">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold" id="total-snakes">0</div>
+                            <div>Snake Species</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold" id="venomous-snakes">0</div>
+                            <div>Venomous Species</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold">6</div>
+                            <div>Continents</div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Emergency Section -->
+            <section class="bg-red-50 border-l-4 border-red-500 py-6">
+                <div class="container mx-auto px-4">
+                    <button id="emergency-btn" class="w-full bg-red-600 text-white py-4 px-6 rounded-lg font-bold text-lg hover:bg-red-700 transition-colors flex items-center justify-center gap-2 emergency-pulse">
+                        🚨 EMERGENCY: Snake Bite Information - Click Here
+                    </button>
+                </div>
+            </section>
+
+            <!-- Search Bar -->
+            <section class="py-8">
+                <div class="container mx-auto px-4">
+                    <form id="search-form" class="max-w-2xl mx-auto">
+                        <div class="flex gap-2">
+                            <input 
+                                type="text" 
+                                id="search-input"
+                                placeholder="Search snakes by name, scientific name, or country..."
+                                class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                            />
+                            <button type="submit" class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors">
+                                Search
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Continents -->
+            <section class="py-12">
+                <div class="container mx-auto px-4">
+                    <h2 class="text-3xl font-bold text-center mb-8">Explore Snakes by Continent</h2>
+                    <div id="continents-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Continent cards will be populated by JavaScript -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features -->
+            <section class="bg-gray-50 py-12">
+                <div class="container mx-auto px-4">
+                    <h2 class="text-3xl font-bold text-center mb-8">Why SerpentAware?</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="text-center">
+                            <div class="text-4xl mb-4">🎯</div>
+                            <h3 class="text-xl font-bold mb-2">Accurate Identification</h3>
+                            <p class="text-gray-600">High-quality images and detailed descriptions help you identify snakes correctly.</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl mb-4">🏥</div>
+                            <h3 class="text-xl font-bold mb-2">Emergency Ready</h3>
+                            <p class="text-gray-600">Instant access to first aid information and emergency procedures.</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl mb-4">📚</div>
+                            <h3 class="text-xl font-bold mb-2">Educational</h3>
+                            <p class="text-gray-600">Learn fascinating facts about snake behavior, habitat, and ecology.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Snakes List View -->
+        <div id="snakes-view" class="view hidden">
+            <header class="bg-white shadow-sm py-4">
+                <div class="container mx-auto px-4">
+                    <div class="flex items-center justify-between">
+                        <button id="back-to-home" class="text-green-600 hover:text-green-700 font-semibold">
+                            ← Back to Home
+                        </button>
+                        <h1 id="snakes-title" class="text-2xl font-bold">Snakes</h1>
+                        <div id="snake-count" class="text-sm text-gray-600">0 species found</div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="container mx-auto px-4 py-8">
+                <div id="snakes-loading" class="text-center py-12 hidden">
+                    <div class="text-2xl">🐍 Loading snakes...</div>
+                </div>
+                <div id="snakes-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Snake cards will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Snake Detail View -->
+        <div id="snake-detail-view" class="view hidden">
+            <header class="bg-white shadow-sm py-4">
+                <div class="container mx-auto px-4">
+                    <button id="back-to-snakes" class="text-green-600 hover:text-green-700 font-semibold">
+                        ← Back to Snake List
+                    </button>
+                </div>
+            </header>
+
+            <div class="container mx-auto px-4 py-8">
+                <div id="snake-detail-content" class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <!-- Snake details will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Emergency View -->
+        <div id="emergency-view" class="view hidden">
+            <header class="bg-red-600 text-white py-6">
+                <div class="container mx-auto px-4">
+                    <div class="flex items-center justify-between">
+                        <button id="back-to-home-emergency" class="text-red-200 hover:text-white font-semibold">
+                            ← Back to Home
+                        </button>
+                        <h1 class="text-3xl font-bold">🚨 Emergency Information</h1>
+                        <div></div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="container mx-auto px-4 py-8">
+                <div id="emergency-content" class="space-y-6">
+                    <!-- Emergency information will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
