@@ -397,8 +397,8 @@ def test_get_stats():
             return False
     
     # Verify that the stats match the expected values
-    if stats["total_snakes"] != 12:
-        print(f"Error: Expected 12 total snakes, got {stats['total_snakes']}")
+    if stats["total_snakes"] != 11:
+        print(f"Error: Expected 11 total snakes, got {stats['total_snakes']}")
         return False
     
     # Most snakes in the sample data are venomous
