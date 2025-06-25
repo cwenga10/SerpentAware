@@ -137,15 +137,18 @@ backend:
 
   - task: "Sample Snake Database Initialization"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Created comprehensive sample dataset with 12 dangerous and educational snakes from 6 continents, including detailed safety information"
+      - working: true
+        agent: "testing"
+        comment: "Tested the POST /api/init-data endpoint. It correctly initializes the database with 11 snake species (not 12 as initially expected) and 3 emergency information items. The sample data includes snakes from all 6 continents with comprehensive safety information."
 
 frontend:
   - task: "Continent Navigation System"
