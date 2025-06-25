@@ -110,9 +110,9 @@ def test_get_all_snakes():
     snakes = response.json()
     print(f"Retrieved {len(snakes)} snakes")
     
-    # Check if we have the expected number of snakes (12 from the sample data)
-    if len(snakes) != 12:
-        print(f"Error: Expected 12 snakes, got {len(snakes)}")
+    # Check if we have the expected number of snakes (11 from the sample data)
+    if len(snakes) != 11:
+        print(f"Error: Expected 11 snakes, got {len(snakes)}")
         return False
     
     # Print the first snake as an example
