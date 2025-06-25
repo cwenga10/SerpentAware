@@ -207,8 +207,6 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Snake Data Model and API Endpoints"
-    - "Sample Snake Database Initialization"
     - "Continent Navigation System"
     - "Emergency Quick-Reference Section"
   stuck_tasks: []
